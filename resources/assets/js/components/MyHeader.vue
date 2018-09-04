@@ -5,9 +5,8 @@
       <img src="https://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
     </a>
     <div class="navbar-menu is-active">
-      <div class="navbar-end"></div>
-      <a class="navbar-item" href="">Home</a>
-      <a class="navbar-item" href="">About</a>
+      <router-link to="/home" class="navbar-item">Home</router-link>
+      <router-link to="/about" class="navbar-item">About</router-link>
     </div>
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
       <span aria-hidden="true"></span>

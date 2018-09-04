@@ -9,7 +9,11 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-import Vue from 'vue';
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+
+Vue.use(VueRouter)
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -20,8 +24,22 @@ import Vue from 'vue';
 let MyHeader = require('./components/MyHeader.vue');
 let MyFooter = require('./components/MyFooter.vue');
 
+let Home = require('./components/Home.vue');
+let About = require('./components/About.vue');
+
+const routes = [
+    { path: '/home', component: Home },
+    { path: '/about', component: About },
+]
+
+const router = new VueRouter({
+    mode: 'history', // Removes hashes in the query
+    routes
+})
+
 const app = new Vue({
     el: '#app',
+    router,
     components: {
         MyHeader,
         MyFooter

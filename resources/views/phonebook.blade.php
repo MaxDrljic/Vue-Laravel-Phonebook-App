@@ -9,8 +9,11 @@
 </head>
 <body>
   <div id="app">
-    <My-Header></My-Header>
-    <My-Footer></My-Footer>
+    <div class="container">
+      <My-Header></My-Header>
+      <router-view></router-view>
+      <My-Footer></My-Footer>
+    </div>
   </div>
   <script src="{{ asset('js/app.js') }}"></script>
 </body>
