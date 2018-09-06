@@ -58,7 +58,10 @@ export default {
       axios
         // Always check valid routes with: php artisan route:list
         .post("/phonebook", this.$data.list)
-        .then(response => this.close())
+        .then(response => {
+          this.close();
+          this.$parent.lists.push(response.data);
+        })
         .catch(error => (this.errors = error.response.data.errors));
     }
   }

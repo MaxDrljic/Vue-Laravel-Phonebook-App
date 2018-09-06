@@ -6,6 +6,9 @@
         <button class="button is-link is-outlined" @click="openAdd">
           Add New
         </button>
+        <span class="is-pulled-right" v-if="loading">
+          <i class="fa fa-refresh fa-spin fa-2x fa-fw"></i>
+        </span>
       </p>
       <div class="panel-block">
         <p class="control has-icons-left">
@@ -20,7 +23,7 @@
           {{ item.name }}
         </span>     
         <span class="panel-icon column is-1">
-          <i class="has-text-danger fa fa-trash" aria-hidden="true"></i>
+          <i class="has-text-danger fa fa-trash" aria-hidden="true" @click="del(key, item.id)"></i>
         </span>
         <span class="panel-icon column is-1">
           <i class="has-text-info fa fa-edit" aria-hidden="true" @click="openUpdate(key)"></i>
@@ -55,6 +58,7 @@ export default {
       updateActive: "",
       lists: {},
       errors: {},
+      loading: false,
       key: ""
     };
   },
@@ -69,15 +73,29 @@ export default {
       this.addActive = "is-active";
     },
     openShow(key) {
-      this.$children[1].list = this.lists[key];
+      this.$children[1].item = this.lists[key];
       this.showActive = "is-active";
     },
     openUpdate(key) {
-      this.$children[2].list = this.lists[key];
+      this.$children[2].item = this.lists[key];
       this.updateActive = "is-active";
     },
     close() {
       this.addActive = this.showActive = this.updateActive = "";
+    },
+    del(key, id) {
+      if (confirm("Are you sure?")) {
+        this.loading = !this.loading;
+        axios
+          .delete(`/phonebook/${id}`)
+          .then(response =>
+            this.lists.splice(key, 1)(
+              (this.loading = !this.loading.catch(
+                error => (this.errors = error.response.data.errors)
+              ))
+            )
+          );
+      }
     }
   }
 };
