@@ -1,3 +1,7 @@
+# Vue-Laravel-Phonebook
+
+Simple phonebook app where you can add, update and delete phone numbers. There is also a search functionality where you can find numbers by name, number or e-mail. The program was created with combination of VueJS and Laravel.
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
