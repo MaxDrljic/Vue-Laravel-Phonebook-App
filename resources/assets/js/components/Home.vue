@@ -68,9 +68,12 @@ export default {
     searchQuery() {
       if (this.searchQuery.length > 0) {
         this.temp = this.lists.filter(item => {
-          return (
-            item.name.toLowerCase().indexOf(this.searchQuery.toLowerCase()) > -1
-          );
+          return Object.keys(item).some(key => {
+            let string = String(item[key]);
+            return (
+              string.toLowerCase().indexOf(this.searchQuery.toLowerCase()) > -1
+            );
+          });
         });
       } else {
         this.temp = this.lists;
@@ -88,11 +91,11 @@ export default {
       this.addActive = "is-active";
     },
     openShow(key) {
-      this.$children[1].item = this.lists[key];
+      this.$children[1].item = this.temp[key];
       this.showActive = "is-active";
     },
     openUpdate(key) {
-      this.$children[2].item = this.lists[key];
+      this.$children[2].item = this.temp[key];
       this.updateActive = "is-active";
     },
     close() {

@@ -46354,7 +46354,10 @@ var Update = __webpack_require__(52);
 
       if (this.searchQuery.length > 0) {
         this.temp = this.lists.filter(function (item) {
-          return item.name.toLowerCase().indexOf(_this.searchQuery.toLowerCase()) > -1;
+          return Object.keys(item).some(function (key) {
+            var string = String(item[key]);
+            return string.toLowerCase().indexOf(_this.searchQuery.toLowerCase()) > -1;
+          });
         });
       } else {
         this.temp = this.lists;
@@ -46376,11 +46379,11 @@ var Update = __webpack_require__(52);
       this.addActive = "is-active";
     },
     openShow: function openShow(key) {
-      this.$children[1].item = this.lists[key];
+      this.$children[1].item = this.temp[key];
       this.showActive = "is-active";
     },
     openUpdate: function openUpdate(key) {
-      this.$children[2].item = this.lists[key];
+      this.$children[2].item = this.temp[key];
       this.updateActive = "is-active";
     },
     close: function close() {
